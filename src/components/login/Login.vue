@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import request from '@/network/request'
+import { loginApi } from '@/network/api'
 import { message } from 'element-ui'
 export default {
   name: 'login',
@@ -68,11 +68,7 @@ export default {
     login() {
       this.$refs.loginFormRef.validate(async (valid, obj) => {
         if (!valid) return
-        const { data: res } = await request({
-          url: 'login',
-          method: 'post',
-          params: this.loginForm
-        })
+        const res = await loginApi(this.loginForm)
         if (res.meta.status !== 200) return message.error('登录失败')
         message.success('登录成功')
         // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
