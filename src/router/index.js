@@ -8,11 +8,19 @@ const login = () => import('../components/login/Login')
 const home = () => import('../components/home/Home')
 const welcome = () => import('../components/welcome/Welcome')
 const users = () => import('../components/users/Users')
+const rights = () => import('../components/power/Rights')
+const roles = () => import('../components/power/Roles')
 
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: login },
-  { path: '/home', component: home, redirect: 'home/welcome', children: [{ path: 'welcome', component: welcome }, { path: 'users', component: users }] }
+  { path: '/home',
+    component: home,
+    redirect: 'home/welcome',
+    children: [{ path: 'welcome', component: welcome },
+      { path: 'users', component: users },
+      { path: 'rights', component: rights },
+      { path: 'roles', component: roles }] }
 ]
 
 const router = new VueRouter({

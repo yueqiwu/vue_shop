@@ -33,9 +33,9 @@ export function getUserListApi(queryInof) {
 }
 
 // 改变用户状态
-export function changeUserStateApi(url) {
+export function changeUserStateApi(id, mgState) {
   return request({
-    url: url,
+    url: `users/${id}/state/${mgState}`,
     method: 'put'
   }).then(res => {
     return res.data
@@ -56,9 +56,9 @@ export function addUserApi(params) {
 }
 
 // 根据 ID 查询用户信息
-export function getUserInfoApi(urlId) {
+export function getUserInfoApi(id) {
   return request({
-    url: urlId,
+    url: 'users/' + id,
     method: 'get'
   }).then(res => {
     return res.data
@@ -66,9 +66,9 @@ export function getUserInfoApi(urlId) {
 }
 
 // 修改用户信息
-export function editUserInfoApi(url, data) {
+export function editUserInfoApi(id, data) {
   return request({
-    url,
+    url: 'users/' + id,
     method: 'put',
     data
   }).then(res => {
@@ -81,6 +81,78 @@ export function deleteUserApi(id) {
   return request({
     url: 'users/' + id,
     method: 'delete'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 获取权限list
+export function getRightsListApi() {
+  return request({
+    url: 'rights/list',
+    method: 'get'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 获取权限tree
+export function getRightsTreeApi() {
+  return request({
+    url: 'rights/tree',
+    method: 'get'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 获取角色列表
+export function getRolesListApi() {
+  return request({
+    url: 'roles',
+    method: 'get'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 删除角色指定权限
+export function removeRightByIdApi(roleId, rightId) {
+  return request({
+    url: `roles/${roleId}/rights/${rightId}`,
+    method: 'delete'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 角色授权
+export function allotRightsApi(id, idStr) {
+  return request({
+    url: `roles/${id}/rights`,
+    method: 'post',
+    data: { rids: idStr }
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 获取所有角色的列表
+export function getRolesApi() {
+  return request({
+    url: 'roles',
+    method: 'get'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 分配角色
+export function setRolesApi(userId, roleId) {
+  return request({
+    url: `users/${userId}/role`,
+    method: 'put',
+    data: { rid: roleId }
   }).then(res => {
     return res.data
   })
