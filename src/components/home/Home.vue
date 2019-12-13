@@ -24,6 +24,8 @@
           :collapse-transition="false"
           router
           :default-active="activePath"
+          ref="menuRef"
+          :key="menuKey"
         >
           <!-- 一级菜单 -->
           <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
@@ -32,7 +34,12 @@
               <span>{{item.authName}}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item :index="'/home/'+subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="savePath('/home/'+subItem.path)">
+            <el-menu-item
+              :index="'/home/'+subItem.path"
+              v-for="subItem in item.children"
+              :key="subItem.id"
+              @click="savePath('/home/'+subItem.path, item.id+'')"
+            >
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>{{subItem.authName}}</span>
@@ -43,7 +50,9 @@
       </el-aside>
       <!-- 右侧主体内容 -->
       <el-main>
-        <router-view/>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
       </el-main>
     </el-container>
   </el-container>
@@ -67,12 +76,22 @@ export default {
       // 是否折叠
       isCollapse: false,
       // 当前路径
-      activePath: ''
+      activePath: '',
+      // 当前所处的一级菜单
+      currentId: '',
+      menuKey: Math.random()
     }
   },
   created() {
     this.getMenuList()
     this.activePath = window.sessionStorage.getItem('vue_shop_active_path')
+    console.log(213456)
+  },
+  mounted() {
+    this.$bus.$on('backHome', () => {
+      this.$refs.menuRef.close(this.currentId)
+      this.activePath = window.sessionStorage.getItem('vue_shop_active_path')
+    })
   },
   methods: {
     logout() {
@@ -87,9 +106,11 @@ export default {
     toggleCollapse() {
       this.isCollapse = !this.isCollapse
     },
-    savePath(path) {
+    savePath(path, id) {
+      console.log(56757)
       window.sessionStorage.setItem('vue_shop_active_path', path)
       this.activePath = path
+      this.currentId = id
     }
   }
 }
@@ -121,7 +142,7 @@ export default {
 }
 .el-aside {
   background-color: #333744;
-  transition: all .5s;
+  transition: all 0.5s;
   .el-menu {
     border-right: none;
   }

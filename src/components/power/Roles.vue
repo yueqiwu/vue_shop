@@ -75,7 +75,6 @@
     <!-- 分配权限的对话框 -->
     <el-dialog title="分配权限" :visible.sync="setRightDialogVisible" width="30%" @close="setRightDialogClosed">
       <!-- 树形控件 -->
-      <span>123</span>
       <el-tree :data="rightslist" :props="treeProps" show-checkbox node-key="id" default-expand-all :default-checked-keys="defKeys" ref="treeRef"></el-tree>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setRightDialogVisible = false">取 消</el-button>
@@ -88,7 +87,10 @@
 <script>
 import { getRolesListApi, removeRightByIdApi, getRightsTreeApi, allotRightsApi } from '@/network/api'
 import { message, MessageBox } from 'element-ui'
+import { backHome } from '@/js/mixin'
 export default {
+  name: 'Roles',
+  mixins: [backHome],
   data() {
     return {
       // 所有角色列表数据

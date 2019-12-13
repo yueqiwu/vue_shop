@@ -28,7 +28,10 @@
 <script>
 import { getRightsListApi } from '@/network/api'
 import { message } from 'element-ui'
+import { backHome } from '@/js/mixin'
 export default {
+  name: 'Rights',
+  mixins: [backHome],
   data() {
     return {
       // 权限列表

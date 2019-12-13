@@ -157,3 +157,25 @@ export function setRolesApi(userId, roleId) {
     return res.data
   })
 }
+
+// 获取商品分类数据列表
+export function getCateListApi(params) {
+  return request({
+    url: 'categories',
+    method: 'get',
+    params
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 添加分类
+export function addCategoryApi(params) {
+  return request({
+    url: 'categories',
+    method: 'post',
+    data: params
+  }).then(res => {
+    return res.data
+  })
+}

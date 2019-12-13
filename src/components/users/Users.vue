@@ -125,8 +125,11 @@
 <script>
 import { getUserListApi, changeUserStateApi, addUserApi, getUserInfoApi, editUserInfoApi, deleteUserApi, getRolesApi, setRolesApi } from '@/network/api'
 import { message, MessageBox } from 'element-ui'
+import { backHome } from '@/js/mixin'
+
 export default {
   name: 'Users',
+  mixins: [backHome],
   data() {
     // 表单验证需要this
     const self = this
