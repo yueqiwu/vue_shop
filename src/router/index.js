@@ -10,6 +10,7 @@ const users = () => import('../components/users/Users')
 const rights = () => import('../components/power/Rights')
 const roles = () => import('../components/power/Roles')
 const cate = () => import('../components/goods/Cate')
+const params = () => import('../components/goods/Params')
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -22,7 +23,8 @@ const routes = [
       { path: 'users', component: users },
       { path: 'rights', component: rights },
       { path: 'roles', component: roles },
-      { path: 'categories', component: cate }
+      { path: 'categories', component: cate },
+      { path: 'params', component: params }
     ]
   }
 ]

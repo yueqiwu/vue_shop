@@ -1,5 +1,6 @@
 import request from './request'
 
+// ------------------------------登录页------------------------------
 // 登录接口
 export function loginApi(params) {
   return request({
@@ -10,7 +11,7 @@ export function loginApi(params) {
     return res.data
   })
 }
-
+// ------------------------------users用户页------------------------------
 // 菜单接口
 export function getMenuApi() {
   return request({
@@ -85,7 +86,7 @@ export function deleteUserApi(id) {
     return res.data
   })
 }
-
+// ---------------------------------rights权限页------------------------------
 // 获取权限list
 export function getRightsListApi() {
   return request({
@@ -105,7 +106,7 @@ export function getRightsTreeApi() {
     return res.data
   })
 }
-
+// ---------------------------------roles角色分配页------------------------------
 // 获取角色列表
 export function getRolesListApi() {
   return request({
@@ -157,16 +158,26 @@ export function setRolesApi(userId, roleId) {
     return res.data
   })
 }
-
+// ------------------------------cate商品分类页------------------------------
 // 获取商品分类数据列表
 export function getCateListApi(params) {
-  return request({
-    url: 'categories',
-    method: 'get',
-    params
-  }).then(res => {
-    return res.data
-  })
+  // 如果params不存在 默认全部获取
+  if (params) {
+    return request({
+      url: 'categories',
+      method: 'get',
+      params
+    }).then(res => {
+      return res.data
+    })
+  } else {
+    return request({
+      url: 'categories',
+      method: 'get'
+    }).then(res => {
+      return res.data
+    })
+  }
 }
 
 // 添加分类
@@ -175,6 +186,75 @@ export function addCategoryApi(params) {
     url: 'categories',
     method: 'post',
     data: params
+  }).then(res => {
+    return res.data
+  })
+}
+// ------------------------------------params商品参数页------------------------------
+// 获取参数列表
+export function getParamsListApi(id, sel) {
+  return request({
+    url: `categories/${id}/attributes`,
+    method: 'get',
+    params: { sel }
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 添加动态参数或者静态属性
+export function addParamsApi(cateId, attrName, attrSel, attrVals = null) {
+  return request({
+    url: `categories/${cateId}/attributes`,
+    method: 'post',
+    data: {
+      'attr_name': attrName,
+      'attr_sel': attrSel,
+      'attr_vals': attrVals
+    }
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 根据 ID 查询参数
+export function getAttributeByIdApi(id, attrid, attrSel) {
+  return request({
+    url: `categories/${id}/attributes/${attrid}`,
+    method: 'get',
+    params: { attrSel }
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 删除参数
+export function removeParamsApi(cateId, atrrId) {
+  return request({
+    url: `categories/${cateId}/attributes/${atrrId}`,
+    method: 'delete'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 编辑提交参数
+/**
+ * cateId 当前三级分类的id
+ * attrId 当前属性的id
+ * atrrName 如果要修改属性名 就把新的名称传这里 不修改则传原值
+ * attrSel 属性的类型[many或only]
+ * attrVals 如果增加或删除属性的值 就把增删后总的值传这里 不该则传原值
+ */
+export function editParamsApi(cateId, attrId, atrrName, attrSel, attrVals) {
+  return request({
+    url: `categories/${cateId}/attributes/${attrId}`,
+    method: 'put',
+    data: {
+      'attr_name': atrrName,
+      'attr_sel': attrSel,
+      'attr_vals': attrVals
+    }
   }).then(res => {
     return res.data
   })

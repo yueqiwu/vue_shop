@@ -51,7 +51,7 @@
       <!-- 右侧主体内容 -->
       <el-main>
         <keep-alive>
-          <router-view/>
+          <router-view />
         </keep-alive>
       </el-main>
     </el-container>
@@ -85,12 +85,13 @@ export default {
   created() {
     this.getMenuList()
     this.activePath = window.sessionStorage.getItem('vue_shop_active_path')
-    console.log(213456)
   },
   mounted() {
-    this.$bus.$on('backHome', () => {
-      this.$refs.menuRef.close(this.currentId)
-      this.activePath = window.sessionStorage.getItem('vue_shop_active_path')
+    this.$nextTick(() => {
+      this.$bus.$on('backHome', () => {
+        this.$refs.menuRef.close(this.currentId)
+        this.activePath = window.sessionStorage.getItem('vue_shop_active_path')
+      })
     })
   },
   methods: {
