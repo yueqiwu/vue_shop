@@ -175,6 +175,7 @@ export default {
       // 必选选择三级属性 否则清零
       if (this.selectedKeys.length !== 3) {
         this.selectedKeys = []
+        // 表格数据清零
         this.manyTableData = []
         this.onlyTableData = []
         return 0

@@ -7,6 +7,7 @@ export default function (config) {
 
   instance.interceptors.request.use(config => {
     config.headers.Authorization = window.sessionStorage.getItem('vue_shop_token')
+    // console.log(config.headers)
     return config
   })
   return instance(config)

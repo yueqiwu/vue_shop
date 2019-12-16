@@ -11,6 +11,8 @@ const rights = () => import('../components/power/Rights')
 const roles = () => import('../components/power/Roles')
 const cate = () => import('../components/goods/Cate')
 const params = () => import('../components/goods/Params')
+const list = () => import('../components/goods/List')
+const add = () => import('../components/goods/Add')
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -24,7 +26,9 @@ const routes = [
       { path: 'rights', component: rights },
       { path: 'roles', component: roles },
       { path: 'categories', component: cate },
-      { path: 'params', component: params }
+      { path: 'params', component: params },
+      { path: 'goods', name: 'goods', component: list },
+      { path: 'goods/add', component: add }
     ]
   }
 ]

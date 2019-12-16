@@ -108,7 +108,6 @@ export default {
       this.isCollapse = !this.isCollapse
     },
     savePath(path, id) {
-      console.log(56757)
       window.sessionStorage.setItem('vue_shop_active_path', path)
       this.activePath = path
       this.currentId = id

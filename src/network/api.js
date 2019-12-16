@@ -192,6 +192,10 @@ export function addCategoryApi(params) {
 }
 // ------------------------------------params商品参数页------------------------------
 // 获取参数列表
+/**
+ * @param { 商品三级分类的id } id
+ * @param { many only 动态属性或静态参数 } sel
+ */
 export function getParamsListApi(id, sel) {
   return request({
     url: `categories/${id}/attributes`,
@@ -255,6 +259,39 @@ export function editParamsApi(cateId, attrId, atrrName, attrSel, attrVals) {
       'attr_sel': attrSel,
       'attr_vals': attrVals
     }
+  }).then(res => {
+    return res.data
+  })
+}
+
+// ------------------------------------商品列表list业-----------------------------------
+// 获取商品列表
+export function getGoodsListApi(params) {
+  return request({
+    url: 'goods',
+    method: 'get',
+    params
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 删除商品
+export function removeGoodById(id) {
+  return request({
+    url: `goods/${id}`,
+    method: 'delete'
+  }).then(res => {
+    return res.data
+  })
+}
+
+// 添加商品
+export function addGoodApi(params) {
+  return request({
+    url: 'goods',
+    method: 'post',
+    data: params
   }).then(res => {
     return res.data
   })
