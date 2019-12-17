@@ -296,3 +296,24 @@ export function addGoodApi(params) {
     return res.data
   })
 }
+
+// ----------------------------------订单列表页---------------------------------
+// 获取订单列表
+export function getOrderListApi(params) {
+  return request({
+    url: 'orders',
+    method: 'get',
+    params
+  }).then(res => {
+    return res.data
+  })
+}
+// 获取物流详情
+export function getProgressApi(id) {
+  return request({
+    url: `/kuaidi/${id}`,
+    method: 'get'
+  }).then(res => {
+    return res.data
+  })
+}

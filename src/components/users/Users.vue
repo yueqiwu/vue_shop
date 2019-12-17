@@ -35,12 +35,27 @@
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
             <!-- 修改按钮 -->
-            <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)"></el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              @click="showEditDialog(scope.row.id)"
+            ></el-button>
             <!-- 删除按钮 -->
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="removeUserById(scope.row.id)"></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="removeUserById(scope.row.id)"
+            ></el-button>
             <!-- 分配角色按钮 -->
             <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-setting" size="mini" @click="setRole(scope.row)"></el-button>
+              <el-button
+                type="warning"
+                icon="el-icon-setting"
+                size="mini"
+                @click="setRole(scope.row)"
+              ></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -103,14 +118,24 @@
       </span>
     </el-dialog>
     <!-- 分配角色的对话框 -->
-    <el-dialog title="分配角色" :visible.sync="setRoleDialogVisible" width="30%" @close="setRoleDialogClosed">
+    <el-dialog
+      title="分配角色"
+      :visible.sync="setRoleDialogVisible"
+      width="30%"
+      @close="setRoleDialogClosed"
+    >
       <div>
         <p>当前的用户：{{userInfo.username}}</p>
         <p>当前的角色：{{userInfo.role_name}}</p>
-        <p>分配新角色：
+        <p>
+          分配新角色：
           <el-select v-model="selectedRoleId" placeholder="请选择">
-            <el-option v-for="item in rolesList" :key="item.id" :label="item.roleName" :value="item.id">
-            </el-option>
+            <el-option
+              v-for="item in rolesList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
+            ></el-option>
           </el-select>
         </p>
       </div>
@@ -123,7 +148,16 @@
 </template>
 
 <script>
-import { getUserListApi, changeUserStateApi, addUserApi, getUserInfoApi, editUserInfoApi, deleteUserApi, getRolesApi, setRolesApi } from '@/network/api'
+import {
+  getUserListApi,
+  changeUserStateApi,
+  addUserApi,
+  getUserInfoApi,
+  editUserInfoApi,
+  deleteUserApi,
+  getRolesApi,
+  setRolesApi
+} from '@/network/api'
 import { message, MessageBox } from 'element-ui'
 import { backHome } from '@/js/mixin'
 
@@ -292,13 +326,10 @@ export default {
       this.$refs.editFormRef.validate(async valid => {
         if (!valid) return
         // 发起修改用户信息的数据请求
-        const res = await editUserInfoApi(
-          this.editForm.id,
-          {
-            email: this.editForm.email,
-            mobile: this.editForm.mobile
-          }
-        )
+        const res = await editUserInfoApi(this.editForm.id, {
+          email: this.editForm.email,
+          mobile: this.editForm.mobile
+        })
 
         if (res.meta.status !== 200) {
           return message.error('更新用户信息失败！')

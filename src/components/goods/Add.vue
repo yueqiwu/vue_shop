@@ -312,7 +312,7 @@ export default {
         }
         message.success('添加商品成功')
         // 跳转回good页
-        this.$router.go('goods')
+        this.$router.push({ name: 'goods' })
       })
     }
   },

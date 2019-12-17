@@ -34,6 +34,7 @@ html,body,#app{
 .el-step__title {
   font-size: 13px;
 }
+/* 富文本编辑器的高度 */
 .ql-editor {
   min-height: 300px;
 }
