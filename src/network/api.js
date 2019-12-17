@@ -317,3 +317,12 @@ export function getProgressApi(id) {
     return res.data
   })
 }
+// ----------------------------------报表页---------------------------------
+export function getReportApi() {
+  return request({
+    url: 'reports/type/1',
+    method: 'get'
+  }).then(res => {
+    return res.data
+  })
+}
